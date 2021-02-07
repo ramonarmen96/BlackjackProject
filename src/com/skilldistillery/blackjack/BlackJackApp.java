@@ -2,7 +2,6 @@ package com.skilldistillery.blackjack;
 
 import java.util.Scanner;
 
-import com.skilldistillery.cards.Card;
 import com.skilldistillery.cards.Dealer;
 import com.skilldistillery.cards.Deck;
 
@@ -42,23 +41,17 @@ public class BlackJackApp {
 	}
 
 	private void newGame() {
-//		First we need to shuffle
-
 		this.deck.shuffle();
-//		we need to be able to use our deck class to deal our hands 
 		this.p1.ph.addCard(this.deck.dealCard());
 		this.d.dh.addCard(this.deck.dealCard());
 		this.p1.ph.addCard(this.deck.dealCard());
 		this.d.dh.addCard(this.deck.dealCard());
-//		we need to be able to view the first card of the dealer but not the second
 		System.out.println("Dealer has: ");
 		this.d.showCardValueRank();
-//		then we need to have it add up our cards(maybe another class will do this math)
-//		we need to be able to see our total and have the option to hit or stay
 		System.out.println("You have: ");
 		this.p1.showCardValueRank();
 		checkHand();
-		hitOrStay();
+//		hitOrStay();
 	}
 
 	private void hitOrStay() {
@@ -67,39 +60,75 @@ public class BlackJackApp {
 		if (option.equals("H")) {
 			this.p1.ph.addCard(this.deck.dealCard());
 			this.p1.showHand();
-			System.out.println("You: " + this.p1.ph.getHandVal());
+
+//			System.out.println("You: " + this.p1.ph.getHandVal());
 			checkHand();
-			hitOrStay();
+//			need to be able to stop game if player busts
 		}
 
-		else {
-			System.out.println("Dealer: " + this.d.dh.getHandVal());
-			System.out.println("You: " + this.p1.ph.getHandVal());
+		else if (option.equals("S")) {
+//			this WAs showing his whole hand not the last card
+//			System.out.print("Dealer: ");
+//			this.d.showCardValueRank();
+			System.out.println("You: " + this.p1.ph.getCards() + " " + this.p1.ph.getHandVal());
+			dealerTurn();
 
 		}
+	}
+
+	private void dealerTurn() {
+//		check his hand
+//		printing so we know it works
+//		System.out.println("you wont see this total: " + this.d.dh.getHandVal());
+
+		while (this.d.dh.getHandVal() < 17) {
+			d.dh.addCard(this.deck.dealCard());
+		}
+
+		whoWins();
 	}
 
 	private void checkHand() {
-
 		if (this.p1.ph.bust()) {
-			System.out.println("You: " + this.p1.ph.getHandVal() + " Bust");
-		} else {
-			hitOrStay();
-
+			System.out.println("Bust");
+			whoWins();
 		}
+//		need to stop hit or stay so that player cannot continue to draw cards
 		if (this.p1.ph.isBlackJack()) {
-			System.out.println("You: " + this.p1.ph.getHandVal() + " Black Jack");
-		} else {
+			System.out.println("Black Jack");
+			whoWins();
+		}
+		if (!this.p1.ph.bust() || !this.p1.ph.isBlackJack()) {
 			hitOrStay();
 		}
 
 	}
 
-//		now we need to have the dealers cards add up and do have him hit or stay
-//		the dealer will automatically draw a card if he is < 16 if he is over he will stay
+	private void whoWins() {
 
-//		so now that the dealer and player have both stayed we need to decide who has won
-//		if either has over 21 they bust 
-//		who ever is closer to 21 wins
+		if (this.p1.ph.bust() || this.d.dh.isBlackJack()
+				|| !this.d.dh.bust() && this.d.dh.getHandVal() > this.p1.ph.getHandVal()) {
+			this.d.showHand();
+			d.dealerWins();
+		}
+		if (this.p1.ph.isBlackJack() || this.d.dh.bust()
+				|| !this.p1.ph.bust() && this.p1.ph.getHandVal() > this.d.dh.getHandVal()) {	
+			this.d.showHand();
+			p1.playerWins();
 
+		}
+		if (this.p1.ph.getHandVal() == this.d.dh.getHandVal()) {
+			this.d.showHand();
+			System.out.println("PUSH");
+		}
+//		BUG HERE
+		String playAgain = kb.nextLine();
+		if (playAgain.equals("Y")) {
+			this.d.dh.clear();
+			this.p1.ph.clear();
+			newGame();
+		}
+	}
 }
+
+//		who ever is closer to 21 wins

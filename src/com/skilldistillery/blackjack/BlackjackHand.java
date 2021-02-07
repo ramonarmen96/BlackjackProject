@@ -1,8 +1,5 @@
 package com.skilldistillery.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.skilldistillery.cards.Card;
 import com.skilldistillery.cards.Hand;
 

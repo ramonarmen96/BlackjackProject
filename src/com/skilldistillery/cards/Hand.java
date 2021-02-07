@@ -15,7 +15,7 @@ public abstract class Hand {
 	}
 	
 	public void clear() {
-		
+		cards.clear();
 	}
 	public abstract int getHandVal();
 
