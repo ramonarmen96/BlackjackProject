@@ -1,7 +1,8 @@
-package com.skilldistillery.cards;
+package com.skilldistillery.blackjack;
 
 import java.util.List;
-import com.skilldistillery.blackjack.BlackjackHand;
+
+import com.skilldistillery.cards.Card;
 
 public class Dealer {
 	public BlackjackHand dh;
@@ -26,8 +27,9 @@ public class Dealer {
 	public void dealerWins() {
 		System.out.println("The House always wins...");
 		System.out.println("New Game Y or N?");
-		
+
 	}
+
 	public void showHand() {
 		System.out.println("Dealer Hand: " + dh.getCards() + " " + dh.getHandVal());
 	}

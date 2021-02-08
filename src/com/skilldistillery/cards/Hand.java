@@ -7,16 +7,17 @@ public abstract class Hand {
 	private List<Card> cards;
 
 	public Hand() {
-		setCards(new ArrayList<>()); 
+		setCards(new ArrayList<>());
 	}
-	
+
 	public void addCard(Card card) {
 		getCards().add(card);
 	}
-	
+
 	public void clear() {
 		cards.clear();
 	}
+
 	public abstract int getHandVal();
 
 	@Override
@@ -31,7 +32,5 @@ public abstract class Hand {
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
-	
-	
-	
+
 }

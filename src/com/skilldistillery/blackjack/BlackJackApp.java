@@ -2,7 +2,6 @@ package com.skilldistillery.blackjack;
 
 import java.util.Scanner;
 
-import com.skilldistillery.cards.Dealer;
 import com.skilldistillery.cards.Deck;
 
 public class BlackJackApp {
@@ -23,7 +22,8 @@ public class BlackJackApp {
 		this.d = new Dealer();
 		this.deck = new Deck();
 
-		System.out.println("Welcome to underground Blackjack..");
+		System.out.println("Welcome to the Lucky 38 ");
+		System.out.println("You must be the HighRoller");
 		System.out.println("Would you like to play some Blackjack? Y or N?");
 		String answer = kb.nextLine();
 		if (answer.equals("N")) {
@@ -51,7 +51,6 @@ public class BlackJackApp {
 		System.out.println("You have: ");
 		this.p1.showCardValueRank();
 		checkHand();
-//		hitOrStay();
 	}
 
 	private void hitOrStay() {
@@ -60,16 +59,10 @@ public class BlackJackApp {
 		if (option.equals("H")) {
 			this.p1.ph.addCard(this.deck.dealCard());
 			this.p1.showHand();
-
-//			System.out.println("You: " + this.p1.ph.getHandVal());
 			checkHand();
-//			need to be able to stop game if player busts
 		}
 
 		else if (option.equals("S")) {
-//			this WAs showing his whole hand not the last card
-//			System.out.print("Dealer: ");
-//			this.d.showCardValueRank();
 			System.out.println("You: " + this.p1.ph.getCards() + " " + this.p1.ph.getHandVal());
 			dealerTurn();
 
@@ -77,10 +70,6 @@ public class BlackJackApp {
 	}
 
 	private void dealerTurn() {
-//		check his hand
-//		printing so we know it works
-//		System.out.println("you wont see this total: " + this.d.dh.getHandVal());
-
 		while (this.d.dh.getHandVal() < 17) {
 			d.dh.addCard(this.deck.dealCard());
 		}
@@ -93,7 +82,6 @@ public class BlackJackApp {
 			System.out.println("Bust");
 			whoWins();
 		}
-//		need to stop hit or stay so that player cannot continue to draw cards
 		if (this.p1.ph.isBlackJack()) {
 			System.out.println("Black Jack");
 			whoWins();
@@ -112,7 +100,7 @@ public class BlackJackApp {
 			d.dealerWins();
 		}
 		if (this.p1.ph.isBlackJack() || this.d.dh.bust()
-				|| !this.p1.ph.bust() && this.p1.ph.getHandVal() > this.d.dh.getHandVal()) {	
+				|| !this.p1.ph.bust() && this.p1.ph.getHandVal() > this.d.dh.getHandVal()) {
 			this.d.showHand();
 			p1.playerWins();
 
@@ -121,13 +109,17 @@ public class BlackJackApp {
 			this.d.showHand();
 			System.out.println("PUSH");
 		}
-//		BUG HERE
 		String playAgain = kb.nextLine();
 		if (playAgain.equals("Y")) {
 			this.d.dh.clear();
 			this.p1.ph.clear();
+			Deck deck = new Deck();
 			newGame();
+		} else if (playAgain.equals("N")) {
+			System.out.println("Good Game");
+
 		}
+		kb.close();
 	}
 }
 
