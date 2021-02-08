@@ -23,7 +23,7 @@ public class BlackJackApp {
 		this.deck = new Deck();
 
 		System.out.println("Welcome to the Lucky 38 ");
-		System.out.println("You must be the HighRoller");
+		System.out.println("You must be the High Roller");
 		System.out.println("Would you like to play some Blackjack? Y or N?");
 		String answer = kb.nextLine();
 		if (answer.equals("N")) {
