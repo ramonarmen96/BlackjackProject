@@ -86,7 +86,7 @@ public class BlackJackApp {
 			System.out.println("Black Jack");
 			whoWins();
 		}
-		if (!this.p1.ph.bust() || !this.p1.ph.isBlackJack()) {
+		else if (!this.p1.ph.bust() || !this.p1.ph.isBlackJack()) {
 			hitOrStay();
 		}
 
