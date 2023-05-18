@@ -17,7 +17,7 @@ Run in Terminal
 
 ### Lessons learned
 I know that I repeated myself throughout the program,
-and after going back through it I was able to removing
+and after going back through it I was able to remove
 some extra code. I had an issue where If the player
 lost and chose not to play anymore I got some exception errors.
 I had a hard time getting the actual cards dealt, but once I
